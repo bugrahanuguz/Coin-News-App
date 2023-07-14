@@ -12,7 +12,7 @@ class CoinsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     List list = [1];
     List tweetList = [1];
-    bool isAdd = false;
+    bool isAdd = true;
     return DefaultTabController(
       length: list.isNotEmpty ? 2 : 1,
       child: Scaffold(
