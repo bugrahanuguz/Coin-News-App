@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 
 import '../../constants/colors.dart';
 import '../../constants/text_style.dart';
+import '../../model/top_coin_model.dart';
+import '../../viewmodel/coins_view_model.dart';
 
 class TrackedCoinsWidget extends StatelessWidget {
   const TrackedCoinsWidget({
@@ -13,6 +15,9 @@ class TrackedCoinsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<TopCoinModel?> coinsList =
+        context.watch<CoinsViewModel>().trackedCoins;
+
     return Container(
       alignment: Alignment.centerLeft,
       //height = 120
@@ -21,24 +26,31 @@ class TrackedCoinsWidget extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,
           children: [
-            trackCoin(),
+            trackCoin(coinsList),
             const SizedBox(width: 15),
             trackMoreCoinsWidget(context)
           ]),
     );
   }
 
-  ListView trackCoin() {
+  ListView trackCoin(List<TopCoinModel?> coinsList) {
     return ListView.separated(
       scrollDirection: Axis.horizontal,
-      itemCount: 1,
+      itemCount: coinsList.length,
       shrinkWrap: true,
       itemBuilder: (BuildContext context, int index) {
+        bool isBTC = Provider.of<CoinsViewModel>(context, listen: false)
+            .isBTC(coinsList[index]!);
         return GestureDetector(
           onTap: () {
             //Coins Screene Git.
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const CoinsScreen()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => CoinsScreen(
+                          coin: coinsList[index]!,
+                          isBTC: isBTC,
+                        )));
           },
           child: Container(
             //width = 120
@@ -51,20 +63,23 @@ class TrackedCoinsWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(
-                  Icons.add_circle_outline,
-                  size: 38,
-                  color: coinNewsColor,
+                Image.network(
+                  coinsList[index]!.image!,
+                  width: 38,
+                  height: 38,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Bitcoin",
+                      coinsList[index]!.name!,
                       style: boldWhiteTextStyle(18),
                     ),
                     Text(
-                      "\$ 62,081.12",
+                      "\$ " +
+                          (Provider.of<CoinsViewModel>(context, listen: false)
+                              .formatCurrenValue(
+                                  coinsList[index]!.currentPrice!)),
                       style: TextStyle(
                           color: positiveValueColor,
                           fontWeight: FontWeight.bold,

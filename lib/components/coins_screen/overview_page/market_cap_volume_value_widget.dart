@@ -1,12 +1,16 @@
+import 'package:coin_news_app/viewmodel/coins_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../constants/text_style.dart';
+import '../../../model/top_coin_model.dart';
 
 class MarketCapAndVolumeValueWidget extends StatelessWidget {
   const MarketCapAndVolumeValueWidget({
     super.key,
+    required this.coinList,
   });
-
+  final TopCoinModel coinList;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -21,7 +25,9 @@ class MarketCapAndVolumeValueWidget extends StatelessWidget {
               style: boldWhiteTextStyle(22),
             ),
             Text(
-              "\$1.1 Tr",
+              "\$" +
+                  Provider.of<CoinsViewModel>(context)
+                      .formatNumber(coinList.marketCap ?? 0),
               style: boldWhiteTextStyle(22),
             )
           ],
@@ -36,7 +42,9 @@ class MarketCapAndVolumeValueWidget extends StatelessWidget {
               style: boldWhiteTextStyle(22),
             ),
             Text(
-              "\$47.5 Bn",
+              "\$" +
+                  Provider.of<CoinsViewModel>(context)
+                      .formatNumber(coinList.totalVolume ?? 0),
               style: boldWhiteTextStyle(22),
             ),
           ],

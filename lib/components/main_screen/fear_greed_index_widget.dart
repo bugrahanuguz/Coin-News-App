@@ -8,6 +8,7 @@ class FeerAndGreedIndexWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int feerGreedIndexValue = 25;
     return Container(
       height: MediaQuery.of(context).size.height * 0.105,
       decoration: BoxDecoration(
@@ -18,12 +19,12 @@ class FeerAndGreedIndexWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           feerGreedIndexText(),
-          indexProgressBar(context),
+          indexProgressBar(context, feerGreedIndexValue),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               feerGreedText("Fear"),
-              feerGreedText("75/100"),
+              feerGreedText("$feerGreedIndexValue/100"),
               feerGreedText("Greed"),
             ],
           )
@@ -32,7 +33,7 @@ class FeerAndGreedIndexWidget extends StatelessWidget {
     );
   }
 
-  SizedBox indexProgressBar(BuildContext context) {
+  SizedBox indexProgressBar(BuildContext context, int feerGreedIndexValue) {
     return SizedBox(
       height: 30,
       child: Stack(
@@ -52,7 +53,9 @@ class FeerAndGreedIndexWidget extends StatelessWidget {
             ),
           ),
           Positioned(
-            left: 0.75 * 100 * (MediaQuery.of(context).size.width - 47) / 100,
+            left: feerGreedIndexValue *
+                (MediaQuery.of(context).size.width - 47) /
+                100,
             child: Container(
               width: 6,
               height: 18,

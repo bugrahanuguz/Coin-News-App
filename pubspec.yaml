@@ -38,6 +38,12 @@ dependencies:
   cupertino_icons: ^1.0.2
   intl: ^0.18.1
   provider: ^6.0.5
+  url_launcher: ^6.1.12
+  qonversion_flutter: ^6.1.1
+  dio: ^5.2.1+1
+  animated_splash_screen: ^1.3.0
+  shared_preferences: ^2.2.0
+
 
 
 dev_dependencies:

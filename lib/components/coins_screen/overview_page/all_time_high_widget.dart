@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 
 import '../../../constants/colors.dart';
 import '../../../constants/text_style.dart';
+import '../../../model/top_coin_model.dart';
 
 class AllTimeHighWidget extends StatelessWidget {
   const AllTimeHighWidget({
-    super.key,
+     super.key, required this.coinList, 
   });
-
+final TopCoinModel coinList;
   @override
   Widget build(BuildContext context) {
     return Row(

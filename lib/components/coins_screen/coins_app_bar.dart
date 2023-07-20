@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../constants/colors.dart';
+import '../../model/top_coin_model.dart';
+import '../../viewmodel/coins_view_model.dart';
 
 class CoinsScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CoinsScreenAppBar({
     super.key,
     required this.list,
-    required this.isAdd,
+    required this.isAdd, required this.isBTC, required this.coin,
   });
 
   final List list;
   final bool isAdd;
+  final bool isBTC;
+    final TopCoinModel coin;
 
   @override
   Widget build(BuildContext context) {
@@ -23,17 +28,34 @@ class CoinsScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
           },
           child: Image.asset("assets/buttons/back_button.png")),
       actions: [
+        isBTC ==false ?
         isAdd == true
             ? GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  
+                Provider.of<CoinsViewModel>(context, listen: false)
+                    .removeTrackedCoin(coin);
+                Provider.of<CoinsViewModel>(context, listen: false)
+                    .isAdded(coin);
+                Provider.of<CoinsViewModel>(context, listen: false)
+                    .saveTrackedCoins();
+              },
+               
                 child: Image.asset(
                   "assets/buttons/bell_fill.png",
                 ))
             : GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Provider.of<CoinsViewModel>(context, listen: false)
+                    .addTrackedCoin(coin);
+                Provider.of<CoinsViewModel>(context, listen: false)
+                    .isAdded(coin);
+                Provider.of<CoinsViewModel>(context, listen: false)
+                    .saveTrackedCoins();
+                },
                 child: Image.asset(
                   "assets/buttons/bell.png",
-                )),
+                )) : SizedBox()
       ],
       title: Center(
         child: Container(

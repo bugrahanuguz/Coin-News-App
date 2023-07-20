@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../../../constants/text_style.dart';
+import '../../../model/top_coin_model.dart';
 
 class WalletAndSourceWidget extends StatelessWidget {
   const WalletAndSourceWidget({
-    super.key,
+    super.key, required this.coinList, 
   });
-
+final TopCoinModel coinList;
   @override
   Widget build(BuildContext context) {
     return Row(

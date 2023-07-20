@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../constants/colors.dart';
+import '../../viewmodel/coins_view_model.dart';
 
 class ExploreScreenSearchBar extends StatelessWidget {
   const ExploreScreenSearchBar({
@@ -14,6 +16,10 @@ class ExploreScreenSearchBar extends StatelessWidget {
       decoration: BoxDecoration(
           color: widgetbackground, borderRadius: BorderRadius.circular(11)),
       child: TextField(
+        onChanged: (value) {
+          Provider.of<CoinsViewModel>(context, listen: false)
+              .searchCoins(value);
+        },
         cursorWidth: 1,
         style: const TextStyle(color: Colors.white),
         controller: searchController,

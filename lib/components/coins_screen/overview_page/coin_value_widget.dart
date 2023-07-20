@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../constants/colors.dart';
 import '../../../constants/text_style.dart';
+import '../../../model/top_coin_model.dart';
+import '../../../viewmodel/coins_view_model.dart';
 
 class CoinValueWidget extends StatelessWidget {
   const CoinValueWidget({
     super.key,
+    required this.coinList,
   });
-
+  final TopCoinModel coinList;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -21,7 +25,7 @@ class CoinValueWidget extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  "BTC",
+                  coinList.symbol!.toUpperCase(),
                   style: TextStyle(
                       color: coinNewsColor,
                       fontSize: 28,
@@ -40,7 +44,7 @@ class CoinValueWidget extends StatelessWidget {
               ],
             ),
             Text(
-              "\$ 62,081.12",
+              "\$ ${Provider.of<CoinsViewModel>(context, listen: false).formatCurrenValue(coinList.currentPrice ?? 0)}",
               style: boldWhiteTextStyle(28),
             )
           ],

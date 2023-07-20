@@ -1,7 +1,10 @@
 import 'package:coin_news_app/constants/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../constants/colors.dart';
+import '../../model/top_coin_model.dart';
 import '../../view/coins_screen.dart';
+import '../../viewmodel/coins_view_model.dart';
 
 class CoinstoWatchWidget extends StatelessWidget {
   const CoinstoWatchWidget({
@@ -10,6 +13,8 @@ class CoinstoWatchWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<TopCoinModel?> coinsList =
+        context.read<CoinsViewModel>().coinsWatchWeek;
     return Container(
       alignment: Alignment.centerLeft,
       //height = 80
@@ -18,11 +23,18 @@ class CoinstoWatchWidget extends StatelessWidget {
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         physics: const NeverScrollableScrollPhysics(),
-        itemCount: 4,
+        itemCount: coinsList.length,
         itemBuilder: (BuildContext context, index) {
+          bool isBTC = Provider.of<CoinsViewModel>(context, listen: false)
+              .isBTC(coinsList[index]!);
           return GestureDetector(
-            onTap: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const CoinsScreen())),
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => CoinsScreen(
+                          coin: coinsList[index]!,
+                          isBTC: isBTC,
+                        ))),
             child: Container(
               //width = 91
               width: MediaQuery.of(context).size.width * 0.227,
@@ -33,17 +45,20 @@ class CoinstoWatchWidget extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const Icon(
-                    Icons.access_alarm,
-                    size: 32,
-                    color: Colors.white,
+                  Image.network(
+                    coinsList[index]!.image!,
+                    width: 32,
+                    height: 32,
                   ),
                   Text(
-                    "FTX Token",
+                    coinsList[index]!.name!,
                     style: boldWhiteTextStyle(14),
                   ),
                   Text(
-                    "\$ 63,66",
+                    "\$ " +
+                        (Provider.of<CoinsViewModel>(context, listen: false)
+                            .formatCurrenValue(
+                                coinsList[index]!.currentPrice!)),
                     style: TextStyle(
                         color: negativeValueColor,
                         fontWeight: FontWeight.bold,

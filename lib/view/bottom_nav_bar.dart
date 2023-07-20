@@ -15,8 +15,11 @@ class BottomNavBar extends StatefulWidget {
 
 class _BottomNavBarState extends State<BottomNavBar> {
   @override
+
+  @override
   Widget build(BuildContext context) {
     int selectedIndex = context.watch<ChangeScreens>().selectedIndex;
+
     late List<Widget> screens = [
       const MainScreen(),
       const ExploreScreen(),

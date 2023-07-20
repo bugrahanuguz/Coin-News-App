@@ -2,29 +2,35 @@ import 'package:flutter/material.dart';
 
 import '../../../constants/colors.dart';
 import '../../../constants/text_style.dart';
+import '../../../model/top_coin_model.dart';
 
 class CoinNameAndNetworkWidget extends StatelessWidget {
   const CoinNameAndNetworkWidget({
     super.key,
+    required this.coinList,
   });
+  final TopCoinModel coinList;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Wrap(
-          direction: Axis.vertical,
-          spacing: -8,
-          children: [
-            Text(
-              "Bitcoin",
-              style: boldWhiteTextStyle(15),
-            ),
-            Text(
-              "BTC",
-              style: boldWhiteTextStyle(28),
-            ),
-          ],
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.23,
+          child: Wrap(
+            direction: Axis.vertical,
+            spacing: -8,
+            children: [
+              Text(
+                coinList.name!,
+                style: boldWhiteTextStyle(15),
+              ),
+              Text(
+                coinList.symbol!.toUpperCase(),
+                style: boldWhiteTextStyle(28),
+              ),
+            ],
+          ),
         ),
         const SizedBox(width: 10),
         Padding(
@@ -64,7 +70,7 @@ class CoinNameAndNetworkWidget extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(width: MediaQuery.of(context).size.width * 0.425),
+        SizedBox(width: MediaQuery.of(context).size.width * 0.32),
         Padding(
           padding: const EdgeInsets.only(top: 15),
           child: GestureDetector(

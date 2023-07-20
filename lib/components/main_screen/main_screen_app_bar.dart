@@ -1,13 +1,16 @@
 import 'package:coin_news_app/view/purchase_screen.dart';
+import 'package:coin_news_app/viewmodel/qonversion.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../constants/colors.dart';
 
 class MainScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const MainScreenAppBar({
+  
+   MainScreenAppBar({
     super.key,
   });
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +29,8 @@ class MainScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
   GestureDetector premiumButton(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => PurchaseScreen()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) =>  PurchaseScreen()));
       },
       child: Lottie.asset(
         'assets/premium_button.json',
