@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.7.10'
+    ext.kotlin_version = '1.8.20'
     repositories {
         google()
         mavenCentral()
@@ -9,6 +9,15 @@ buildscript {
         classpath 'com.android.tools.build:gradle:7.3.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
+    configurations.all {
+    resolutionStrategy {
+        eachDependency { details ->
+            if (details.requested.group == 'com.squareup.moshi') {
+                details.useVersion '1.14.0'  // Burada en son sürümü kullanın
+            }
+        }
+    }
+}
 }
 
 allprojects {
@@ -17,6 +26,7 @@ allprojects {
         mavenCentral()
     }
 }
+
 
 rootProject.buildDir = '../build'
 subprojects {

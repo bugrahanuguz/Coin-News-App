@@ -53,9 +53,11 @@ class CoinsViewModel extends ChangeNotifier {
     trackedCoins.remove(coin);
     notifyListeners();
   }
-    Future<void> saveTrackedCoins() async {
+
+  Future<void> saveTrackedCoins() async {
     final prefs = await SharedPreferences.getInstance();
-    final trackedCoinsJson = jsonEncode(trackedCoins.map((coin) => coin!.toJson()).toList());
+    final trackedCoinsJson =
+        jsonEncode(trackedCoins.map((coin) => coin!.toJson()).toList());
     await prefs.setString('trackedCoins', trackedCoinsJson);
   }
 
@@ -64,7 +66,9 @@ class CoinsViewModel extends ChangeNotifier {
     final trackedCoinsJson = prefs.getString('trackedCoins');
     if (trackedCoinsJson != null) {
       final List<dynamic> trackedCoinsList = jsonDecode(trackedCoinsJson);
-      trackedCoins = trackedCoinsList.map((coin) => TopCoinModel.fromJson(coin)).toList();
+      trackedCoins = trackedCoinsList
+          .map((coin) => TopCoinModel.fromJson(Map<String, dynamic>.from(coin)))
+          .toList();
     }
   }
 
@@ -84,6 +88,7 @@ class CoinsViewModel extends ChangeNotifier {
         return;
       }
     }
+    print(currentPage);
     currentPage++;
     notifyListeners();
   }
@@ -117,7 +122,7 @@ class CoinsViewModel extends ChangeNotifier {
   String formatCurrenValue(num number) {
     NumberFormat format;
     if (number < 0.1) {
-      format = NumberFormat("#,##0.00000000", "en_US");
+      format = NumberFormat("#,##0.0000000", "en_US");
     } else if (number < 1) {
       format = NumberFormat("#,##0.000000", "en_US");
     } else if (number < 1000) {

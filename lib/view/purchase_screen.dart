@@ -1,7 +1,7 @@
 import 'package:coin_news_app/constants/colors.dart';
-import 'package:coin_news_app/viewmodel/qonversion.dart';
+
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+
 import '../components/purchase_screen/purchase_screen_button_widget.dart';
 import '../components/purchase_screen/purchase_screen_lottie_widget.dart';
 import '../components/purchase_screen/purchase_screen_text_widget.dart';

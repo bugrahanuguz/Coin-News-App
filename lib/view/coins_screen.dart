@@ -1,5 +1,7 @@
+import 'package:coin_news_app/model/news_model.dart';
 import 'package:coin_news_app/model/top_coin_model.dart';
 import 'package:coin_news_app/viewmodel/coins_view_model.dart';
+import 'package:coin_news_app/viewmodel/news_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../components/coins_screen/coins_app_bar.dart';
@@ -17,14 +19,14 @@ class CoinsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List list = [1];
+    List<NewsModel?> newsList = Provider.of<NewsViewModel>(context).newsList;
     List tweetList = [1];
     bool isAdd = Provider.of<CoinsViewModel>(context).isAdded(coin);
     return DefaultTabController(
-      length: list.isNotEmpty ? 2 : 1,
+      length: newsList.isNotEmpty ? 2 : 1,
       child: Scaffold(
         appBar: CoinsScreenAppBar(
-          list: list,
+          list: newsList,
           isAdd: isAdd,
           isBTC: isBTC,
           coin: coin,
@@ -37,8 +39,8 @@ class CoinsScreen extends StatelessWidget {
               getCoin: coin,
               isBTC: isBTC,
             ),
-            if (list.isNotEmpty) ...[
-              NewsPage(tweetList: tweetList),
+            if (newsList.isNotEmpty) ...[
+              NewsPage(tweetList: tweetList, newsList: newsList, coin: coin),
             ]
           ],
         ),

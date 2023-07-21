@@ -9,13 +9,15 @@ class CoinsScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CoinsScreenAppBar({
     super.key,
     required this.list,
-    required this.isAdd, required this.isBTC, required this.coin,
+    required this.isAdd,
+    required this.isBTC,
+    required this.coin,
   });
 
   final List list;
   final bool isAdd;
   final bool isBTC;
-    final TopCoinModel coin;
+  final TopCoinModel coin;
 
   @override
   Widget build(BuildContext context) {
@@ -28,34 +30,42 @@ class CoinsScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
           },
           child: Image.asset("assets/buttons/back_button.png")),
       actions: [
-        isBTC ==false ?
-        isAdd == true
-            ? GestureDetector(
-                onTap: () {
-                  
-                Provider.of<CoinsViewModel>(context, listen: false)
-                    .removeTrackedCoin(coin);
-                Provider.of<CoinsViewModel>(context, listen: false)
-                    .isAdded(coin);
-                Provider.of<CoinsViewModel>(context, listen: false)
-                    .saveTrackedCoins();
-              },
-               
-                child: Image.asset(
-                  "assets/buttons/bell_fill.png",
-                ))
-            : GestureDetector(
-                onTap: () {
-                  Provider.of<CoinsViewModel>(context, listen: false)
-                    .addTrackedCoin(coin);
-                Provider.of<CoinsViewModel>(context, listen: false)
-                    .isAdded(coin);
-                Provider.of<CoinsViewModel>(context, listen: false)
-                    .saveTrackedCoins();
-                },
-                child: Image.asset(
-                  "assets/buttons/bell.png",
-                )) : SizedBox()
+        Row(
+          children: [
+            const SizedBox(
+              width: 10,
+            ),
+            isBTC == false
+                ? isAdd == true
+                    ? GestureDetector(
+                        onTap: () {
+                          Provider.of<CoinsViewModel>(context, listen: false)
+                              .removeTrackedCoin(coin);
+                          Provider.of<CoinsViewModel>(context, listen: false)
+                              .isAdded(coin);
+                          Provider.of<CoinsViewModel>(context, listen: false)
+                              .saveTrackedCoins();
+                        },
+                        child: Image.asset(
+                          "assets/buttons/bell_fill.png",
+                        ))
+                    : GestureDetector(
+                        onTap: () {
+                          Provider.of<CoinsViewModel>(context, listen: false)
+                              .addTrackedCoin(coin);
+                          Provider.of<CoinsViewModel>(context, listen: false)
+                              .isAdded(coin);
+                          Provider.of<CoinsViewModel>(context, listen: false)
+                              .saveTrackedCoins();
+                        },
+                        child: Image.asset(
+                          "assets/buttons/bell.png",
+                        ))
+                : SizedBox(
+                    width: 32,
+                  ),
+          ],
+        )
       ],
       title: Center(
         child: Container(

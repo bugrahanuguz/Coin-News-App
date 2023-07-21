@@ -7,6 +7,7 @@ import '../../constants/colors.dart';
 import '../../constants/text_style.dart';
 import '../../model/top_coin_model.dart';
 import '../../viewmodel/coins_view_model.dart';
+import '../../viewmodel/news_view_model.dart';
 
 class TrackedCoinsWidget extends StatelessWidget {
   const TrackedCoinsWidget({
@@ -44,6 +45,7 @@ class TrackedCoinsWidget extends StatelessWidget {
         return GestureDetector(
           onTap: () {
             //Coins Screene Git.
+                Provider.of<NewsViewModel>(context,listen: false).getCoinNews(coinsList[index]!.name!);
             Navigator.push(
                 context,
                 MaterialPageRoute(

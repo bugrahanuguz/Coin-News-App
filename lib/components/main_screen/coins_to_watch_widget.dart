@@ -1,4 +1,5 @@
 import 'package:coin_news_app/constants/text_style.dart';
+import 'package:coin_news_app/viewmodel/news_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../constants/colors.dart';
@@ -28,13 +29,17 @@ class CoinstoWatchWidget extends StatelessWidget {
           bool isBTC = Provider.of<CoinsViewModel>(context, listen: false)
               .isBTC(coinsList[index]!);
           return GestureDetector(
-            onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => CoinsScreen(
-                          coin: coinsList[index]!,
-                          isBTC: isBTC,
-                        ))),
+            onTap: () {
+              Provider.of<NewsViewModel>(context, listen: false)
+                  .getCoinNews(coinsList[index]!.name!);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => CoinsScreen(
+                            coin: coinsList[index]!,
+                            isBTC: isBTC,
+                          )));
+            },
             child: Container(
               //width = 91
               width: MediaQuery.of(context).size.width * 0.227,

@@ -2,11 +2,19 @@ import 'package:coin_news_app/components/main_screen/show_news_widget.dart';
 import 'package:coin_news_app/components/main_screen/show_tweets_widget.dart';
 import 'package:coin_news_app/constants/colors.dart';
 import 'package:coin_news_app/constants/text_style.dart';
+import 'package:coin_news_app/model/news_model.dart';
+import 'package:coin_news_app/model/top_coin_model.dart';
 import 'package:flutter/material.dart';
 
 class NewsPage extends StatelessWidget {
-  const NewsPage({super.key, required this.tweetList});
+  const NewsPage(
+      {super.key,
+      required this.tweetList,
+      required this.newsList,
+      required this.coin});
   final List tweetList;
+  final List<NewsModel?> newsList;
+  final TopCoinModel coin;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -16,7 +24,7 @@ class NewsPage extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            buildScreenTitle(),
+            buildScreenTitle(coin),
             const SizedBox(height: 10),
             if (tweetList.isNotEmpty) ...[
               buildTweetsTitle(),
@@ -26,61 +34,59 @@ class NewsPage extends StatelessWidget {
               buildNewsTitle(),
             ],
             const SizedBox(height: 5),
-            buildNews()
+            buildNews(newsList)
           ],
         ),
       ),
     );
   }
 
-  Text buildScreenTitle() {
+  Text buildScreenTitle(TopCoinModel coin) {
     return Text(
-            "Bitcoin",
-            style: boldWhiteTextStyle(28),
-          );
+      coin.name!,
+      style: boldWhiteTextStyle(28),
+    );
   }
 
   Text buildNewsTitle() {
     return Text(
-              "Bitcoin News",
-              style: boldWhiteTextStyle(18),
-            );
+      "${coin.name} News",
+      style: boldWhiteTextStyle(18),
+    );
   }
 
   Text buildTweetsTitle() {
     return Text(
-              "Hand Picked Tweets",
-              style: TextStyle(
-                  color: coinNewsColor,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600),
-            );
+      "Hand Picked Tweets",
+      style: TextStyle(
+          color: coinNewsColor, fontSize: 18, fontWeight: FontWeight.w600),
+    );
   }
 
   Flexible buildTweets() {
     return Flexible(
-              fit: FlexFit.loose,
-              flex: 0,
-              child: ListView.separated(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemBuilder: ((context, index) => const ShowTweetsWidget()),
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(height: 15),
-                  itemCount: 2),
-            );
+      fit: FlexFit.loose,
+      flex: 0,
+      child: ListView.separated(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemBuilder: ((context, index) => const ShowTweetsWidget()),
+          separatorBuilder: (context, index) => const SizedBox(height: 15),
+          itemCount: 2),
+    );
   }
 
-  Flexible buildNews() {
+  Flexible buildNews(List<NewsModel?> newsList) {
     return Flexible(
-            fit: FlexFit.loose,
-            child: ListView.separated(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemBuilder: ((context, index) => const ShowNewsWidget()),
-                separatorBuilder: (context, index) =>
-                    const SizedBox(height: 15),
-                itemCount: 2),
-          );
+      fit: FlexFit.loose,
+      child: ListView.separated(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemBuilder: ((context, index) => ShowNewsWidget(
+                news: newsList[index],
+              )),
+          separatorBuilder: (context, index) => const SizedBox(height: 15),
+          itemCount: newsList.length),
+    );
   }
 }

@@ -1,5 +1,5 @@
 import 'package:coin_news_app/view/purchase_screen.dart';
-import 'package:coin_news_app/viewmodel/qonversion.dart';
+
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 

@@ -11,7 +11,7 @@ class ExploreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<TopCoinModel?> coinsList = context.watch<CoinsViewModel>().coinsItems;
+    // List<TopCoinModel?> coinsList = context.watch<CoinsViewModel>().coinsItems;
     List<TopCoinModel?> filteredCoinsList = context.watch<CoinsViewModel>().filteredCoinsList;
     return  Scaffold(
       appBar: const ExploreScreenAppBar(),

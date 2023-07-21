@@ -21,6 +21,7 @@ class QonversionService extends ChangeNotifier {
     } catch (e) {
       print("[QonversionService] Unexpected error $e");
     }
+    return null;
   }
 
   Future<QProduct?> getProductById(String productId) async {

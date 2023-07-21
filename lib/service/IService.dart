@@ -9,6 +9,7 @@ abstract class IService {
   final String getTopCoinsPath = ILoginServicePath.GETTOPCOIN.rawValue;
 
   Future<List<TopCoinModel?>> getTopCoins();
+
 }
 
 enum ILoginServicePath {

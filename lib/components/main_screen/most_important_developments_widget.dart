@@ -16,7 +16,7 @@ class MostImportantDevelopmentsWidget extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         return const Column(
           children: [
-            ShowNewsWidget(),
+            // ShowNewsWidget(),
             SizedBox(height: 15),
             ShowTweetsWidget()
           ],

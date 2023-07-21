@@ -19,12 +19,11 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor,
-      appBar:  MainScreenAppBar(),
+      appBar: MainScreenAppBar(),
       body: const SafeArea(
         child: Padding(
           padding: EdgeInsets.only(top: 10, left: 10, right: 10),
@@ -47,7 +46,8 @@ class _MainScreenState extends State<MainScreen> {
                 SizedBox(height: 15),
                 MostImportantDevelopmentsTextWidget(),
                 SizedBox(height: 10),
-                MostImportantDevelopmentsWidget()
+                MostImportantDevelopmentsWidget(),
+                SizedBox(height: 15)
               ],
             ),
           ),

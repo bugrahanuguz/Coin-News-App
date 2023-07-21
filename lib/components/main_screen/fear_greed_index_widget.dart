@@ -8,7 +8,7 @@ class FeerAndGreedIndexWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int feerGreedIndexValue = 25;
+    int feerGreedIndexValue = 75;
     return Container(
       height: MediaQuery.of(context).size.height * 0.105,
       decoration: BoxDecoration(
