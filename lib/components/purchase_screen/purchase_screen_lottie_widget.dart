@@ -10,7 +10,7 @@ class PurchaseScreenLottieWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Positioned(
       right: -150,
-      top: -90,
+      top: -70,
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,

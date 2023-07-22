@@ -1,6 +1,7 @@
 import 'package:coin_news_app/view/coins_screen.dart';
 import 'package:coin_news_app/viewmodel/change_screens.dart';
 import 'package:flutter/material.dart';
+import 'package:marquee/marquee.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/colors.dart';
@@ -42,10 +43,12 @@ class TrackedCoinsWidget extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         bool isBTC = Provider.of<CoinsViewModel>(context, listen: false)
             .isBTC(coinsList[index]!);
+        final textLength = coinsList[index]!.name!.length;
         return GestureDetector(
           onTap: () {
             //Coins Screene Git.
-                Provider.of<NewsViewModel>(context,listen: false).getCoinNews(coinsList[index]!.name!);
+            Provider.of<NewsViewModel>(context, listen: false)
+                .getCoinNews(coinsList[index]!.name!);
             Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -73,9 +76,24 @@ class TrackedCoinsWidget extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      coinsList[index]!.name!,
-                      style: boldWhiteTextStyle(18),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.35,
+                      height: MediaQuery.of(context).size.height * 0.035,
+                      child: textLength < 14
+                          ? Text(
+                              coinsList[index]!.name!,
+                              style: boldWhiteTextStyle(18),
+                            )
+                          : Marquee(
+                              text: coinsList[index]!.name!,
+                              blankSpace: 20,
+                              velocity: 40,
+                              pauseAfterRound: Duration(seconds: 2),
+                              showFadingOnlyWhenScrolling: true,
+                              fadingEdgeStartFraction: 0.1,
+                              fadingEdgeEndFraction: 0.1,
+                              style: boldWhiteTextStyle(18),
+                            ),
                     ),
                     Text(
                       "\$ " +

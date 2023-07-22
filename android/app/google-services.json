@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "907198853955",
+    "project_id": "coinnews-prod",
+    "storage_bucket": "coinnews-prod.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:907198853955:android:f321baf916bdcd6492b5f6",
+        "android_client_info": {
+          "package_name": "co.dasas.coinnews"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "907198853955-nvn1bckq6vegb3tf5qmob14bd4oshsf8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1tS7eI2OwmcvnrdbqSfv-Hkl2XNaL7CA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "907198853955-nvn1bckq6vegb3tf5qmob14bd4oshsf8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "907198853955-dhtkegkh1346m89a6ouc5d3br4gjs3gk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "co.dasas.coinnews",
+                "app_store_id": "1587347703"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

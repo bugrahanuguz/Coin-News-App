@@ -1,4 +1,4 @@
-package com.example.coin_news_app
+package co.dasas.coinnews
 
 import io.flutter.embedding.android.FlutterActivity
 

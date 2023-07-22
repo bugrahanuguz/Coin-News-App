@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>907198853955-g6qv7kkok80aupb6ppeb27imtqakctkt.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.907198853955-g6qv7kkok80aupb6ppeb27imtqakctkt</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD-uz53lXiPBKd7bKWukxwC4wwZIsnrL1M</string>
+	<key>GCM_SENDER_ID</key>
+	<string>907198853955</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.coinNewsApp</string>
+	<key>PROJECT_ID</key>
+	<string>coinnews-prod</string>
+	<key>STORAGE_BUCKET</key>
+	<string>coinnews-prod.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:907198853955:ios:be205730c3b17eeb92b5f6</string>
+</dict>
+</plist>

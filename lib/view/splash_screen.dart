@@ -1,4 +1,6 @@
 import 'package:coin_news_app/viewmodel/coins_view_model.dart';
+import 'package:coin_news_app/viewmodel/firebase_remote_config.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -40,6 +42,8 @@ class _CustomSplashScreenState extends State<CustomSplashScreen>
             .addCoinsToWatchCoins();
         Provider.of<QonversionService>(context, listen: false)
             .initializeQonversion();
+        Provider.of<RemoteConfigService>(context, listen: false)
+            .initialize();
         Provider.of<CoinsViewModel>(context, listen: false).loadTrackedCoins();
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => const BottomNavBar()));
