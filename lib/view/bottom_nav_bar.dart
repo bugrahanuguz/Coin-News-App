@@ -2,7 +2,9 @@ import 'package:coin_news_app/constants/colors.dart';
 import 'package:coin_news_app/view/explore_screen.dart';
 import 'package:coin_news_app/view/main_screen.dart';
 import 'package:coin_news_app/view/tracked_coins_screen.dart';
+import 'package:coin_news_app/viewmodel/amplitude.dart';
 import 'package:coin_news_app/viewmodel/change_screens.dart';
+import 'package:coin_news_app/viewmodel/firebase_analtyics.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,7 +17,6 @@ class BottomNavBar extends StatefulWidget {
 
 class _BottomNavBarState extends State<BottomNavBar> {
   @override
-
   @override
   Widget build(BuildContext context) {
     int selectedIndex = context.watch<ChangeScreens>().selectedIndex;
@@ -57,6 +58,15 @@ class _BottomNavBarState extends State<BottomNavBar> {
           ],
           currentIndex: selectedIndex,
           onTap: (value) {
+            if (value == 0) {
+              AmplitudeConnection.home_screen_opened();
+              FirebaseAnalyticsService.home_screen_opened();
+            } else if (value == 1) {
+              AmplitudeConnection.explore_screen_opened();
+              FirebaseAnalyticsService.explore_screen_opened();
+            } else
+              AmplitudeConnection.tracked_coins_screen_opened();
+              FirebaseAnalyticsService.tracked_coins_screen_opened();
             context.read<ChangeScreens>().changeScreen(value);
           },
         ),

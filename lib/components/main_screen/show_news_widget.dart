@@ -1,3 +1,6 @@
+import 'package:coin_news_app/model/top_coin_model.dart';
+import 'package:coin_news_app/viewmodel/amplitude.dart';
+import 'package:coin_news_app/viewmodel/firebase_analtyics.dart';
 import 'package:coin_news_app/viewmodel/news_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,8 +13,12 @@ class ShowNewsWidget extends StatelessWidget {
   const ShowNewsWidget({
     super.key,
     required this.news,
+    required this.isTappedMid,
+    this.coin,
   });
   final NewsModel? news;
+  final bool isTappedMid;
+  final TopCoinModel? coin;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +27,17 @@ class ShowNewsWidget extends StatelessWidget {
         context.read<NewsViewModel>().timeAgo(news!.publishedAt!);
     return GestureDetector(
       onTap: () {
+        if (isTappedMid == true) {
+          AmplitudeConnection.mid_tapped(
+              'news', news!.url!, 'order', news!.source!);
+          FirebaseAnalyticsService.mid_tapped(
+              'news', news!.url!, 'order', news!.source!);
+        } else {
+          AmplitudeConnection.coin_screen_news_tapped(
+              coin!.name!, 'news', news!.url!, 'order', news!.source!);
+          FirebaseAnalyticsService.coin_screen_news_tapped(
+              coin!.name!, 'news', news!.url!, 'order', news!.source!);
+        }
         context.read<ChangeScreens>().launchInBrowser(Uri.parse(news!.url!));
       },
       child: Container(

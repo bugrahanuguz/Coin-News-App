@@ -1,3 +1,5 @@
+import 'package:coin_news_app/viewmodel/amplitude.dart';
+import 'package:coin_news_app/viewmodel/firebase_analtyics.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants/colors.dart';
@@ -74,13 +76,21 @@ class CoinNameAndNetworkWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 15),
           child: GestureDetector(
+              onTap: () {
+                AmplitudeConnection.socials_link_tapped(coinList.name!);
+                FirebaseAnalyticsService.socials_link_tapped(coinList.name!);
+              },
               child: Image.asset("assets/buttons/reddit_icon.png")),
         ),
         const SizedBox(width: 8),
         Padding(
           padding: const EdgeInsets.only(top: 15),
-          child:
-              GestureDetector(child: Image.asset("assets/buttons/network.png")),
+          child: GestureDetector(
+              onTap: () {
+                AmplitudeConnection.socials_link_tapped(coinList.name!);
+                FirebaseAnalyticsService.socials_link_tapped(coinList.name!);
+              },
+              child: Image.asset("assets/buttons/network.png")),
         )
       ],
     );

@@ -1,4 +1,6 @@
+import 'package:coin_news_app/viewmodel/amplitude.dart';
 import 'package:coin_news_app/viewmodel/change_screens.dart';
+import 'package:coin_news_app/viewmodel/firebase_analtyics.dart';
 import 'package:coin_news_app/viewmodel/qonversion.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -8,8 +10,9 @@ import '../../constants/text_style.dart';
 
 class PurchaseScreenButtonsWidget extends StatelessWidget {
   final String productID = 'cn_4999_1y_3d0';
+  final String source;
   const PurchaseScreenButtonsWidget({
-    super.key,
+    super.key, required this.source,
   });
 
   @override
@@ -27,6 +30,8 @@ class PurchaseScreenButtonsWidget extends StatelessWidget {
             GestureDetector(
               onTap: () async {
                 print("butona basıldı");
+                AmplitudeConnection.purchased_intended(source);
+                FirebaseAnalyticsService.purchased_intended(source);
                 try {
                   QProduct? product =
                       await qonversionService.getProductById(productID);

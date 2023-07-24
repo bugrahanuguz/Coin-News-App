@@ -1,10 +1,12 @@
 import 'package:coin_news_app/model/top_coin_model.dart';
+import 'package:coin_news_app/viewmodel/amplitude.dart';
 import 'package:coin_news_app/viewmodel/coins_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/colors.dart';
 import '../../../constants/text_style.dart';
+import '../../../viewmodel/firebase_analtyics.dart';
 
 class AddOrRemoveTrackedCoinsButtonWidget extends StatelessWidget {
   const AddOrRemoveTrackedCoinsButtonWidget({
@@ -23,6 +25,8 @@ class AddOrRemoveTrackedCoinsButtonWidget extends StatelessWidget {
         ? GestureDetector(
             onTap: () {
               if (isAdd == false) {
+                AmplitudeConnection.coin_tracked(coin.name!);
+                FirebaseAnalyticsService.coin_tracked(coin.name!);
                 Provider.of<CoinsViewModel>(context, listen: false)
                     .addTrackedCoin(coin);
                 Provider.of<CoinsViewModel>(context, listen: false)
@@ -30,6 +34,8 @@ class AddOrRemoveTrackedCoinsButtonWidget extends StatelessWidget {
                 Provider.of<CoinsViewModel>(context, listen: false)
                     .saveTrackedCoins();
               } else {
+                AmplitudeConnection.coin_untracked(coin.name!);
+                FirebaseAnalyticsService.coin_untracked(coin.name!);
                 Provider.of<CoinsViewModel>(context, listen: false)
                     .removeTrackedCoin(coin);
                 Provider.of<CoinsViewModel>(context, listen: false)

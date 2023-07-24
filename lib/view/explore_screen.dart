@@ -1,9 +1,11 @@
+import 'package:coin_news_app/viewmodel/firebase_analtyics.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../components/coins_widget.dart';
 import '../components/explore_screen/explore_screen_app_bar.dart';
 import '../components/explore_screen/search_bar.dart';
 import '../model/top_coin_model.dart';
+import '../viewmodel/amplitude.dart';
 import '../viewmodel/coins_view_model.dart';
 
 class ExploreScreen extends StatelessWidget {
@@ -11,9 +13,12 @@ class ExploreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AmplitudeConnection.explore_screen_viewed();
+    FirebaseAnalyticsService.explore_screen_viewed();
     // List<TopCoinModel?> coinsList = context.watch<CoinsViewModel>().coinsItems;
-    List<TopCoinModel?> filteredCoinsList = context.watch<CoinsViewModel>().filteredCoinsList;
-    return  Scaffold(
+    List<TopCoinModel?> filteredCoinsList =
+        context.watch<CoinsViewModel>().filteredCoinsList;
+    return Scaffold(
       appBar: const ExploreScreenAppBar(),
       body: Padding(
         padding: const EdgeInsets.only(top: 10, left: 10, right: 10),

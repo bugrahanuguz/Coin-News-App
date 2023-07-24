@@ -1,6 +1,8 @@
+import 'package:coin_news_app/viewmodel/firebase_analtyics.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../constants/colors.dart';
+import '../../viewmodel/amplitude.dart';
 import '../../viewmodel/coins_view_model.dart';
 
 class ExploreScreenSearchBar extends StatelessWidget {
@@ -16,6 +18,10 @@ class ExploreScreenSearchBar extends StatelessWidget {
       decoration: BoxDecoration(
           color: widgetbackground, borderRadius: BorderRadius.circular(11)),
       child: TextField(
+        onTap: () {
+          AmplitudeConnection.search_tab_tapped();
+          FirebaseAnalyticsService.search_tab_tapped();
+        },
         onChanged: (value) {
           Provider.of<CoinsViewModel>(context, listen: false)
               .searchCoins(value);

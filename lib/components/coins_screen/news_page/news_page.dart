@@ -29,12 +29,12 @@ class NewsPage extends StatelessWidget {
             if (tweetList.isNotEmpty) ...[
               buildTweetsTitle(),
               const SizedBox(height: 10),
-              buildTweets(),
+              buildTweets(coin),
               const SizedBox(height: 10),
               buildNewsTitle(),
             ],
             const SizedBox(height: 5),
-            buildNews(newsList)
+            buildNews(newsList, coin)
           ],
         ),
       ),
@@ -63,28 +63,30 @@ class NewsPage extends StatelessWidget {
     );
   }
 
-  Flexible buildTweets() {
+  Flexible buildTweets(TopCoinModel coin) {
     return Flexible(
       fit: FlexFit.loose,
       flex: 0,
       child: ListView.separated(
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
-          itemBuilder: ((context, index) => const ShowTweetsWidget()),
+          itemBuilder: ((context, index) => ShowTweetsWidget(
+                isTappedMid: false,
+                coin: coin,
+              )),
           separatorBuilder: (context, index) => const SizedBox(height: 15),
           itemCount: 2),
     );
   }
 
-  Flexible buildNews(List<NewsModel?> newsList) {
+  Flexible buildNews(List<NewsModel?> newsList, TopCoinModel coin) {
     return Flexible(
       fit: FlexFit.loose,
       child: ListView.separated(
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: ((context, index) => ShowNewsWidget(
-                news: newsList[index],
-              )),
+              news: newsList[index], isTappedMid: false, coin: coin)),
           separatorBuilder: (context, index) => const SizedBox(height: 15),
           itemCount: newsList.length),
     );

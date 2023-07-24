@@ -7,7 +7,9 @@ import 'package:provider/provider.dart';
 import '../../constants/colors.dart';
 import '../../constants/text_style.dart';
 import '../../model/top_coin_model.dart';
+import '../../viewmodel/amplitude.dart';
 import '../../viewmodel/coins_view_model.dart';
+import '../../viewmodel/firebase_analtyics.dart';
 import '../../viewmodel/news_view_model.dart';
 
 class TrackedCoinsWidget extends StatelessWidget {
@@ -47,6 +49,10 @@ class TrackedCoinsWidget extends StatelessWidget {
         return GestureDetector(
           onTap: () {
             //Coins Screene Git.
+            AmplitudeConnection.main_screen_tracked_coins_tapped(
+                coinsList[index]!.name!);
+            FirebaseAnalyticsService.main_screen_tracked_coins_tapped(
+                coinsList[index]!.name!);
             Provider.of<NewsViewModel>(context, listen: false)
                 .getCoinNews(coinsList[index]!.name!);
             Navigator.push(
@@ -121,6 +127,8 @@ class TrackedCoinsWidget extends StatelessWidget {
   GestureDetector trackMoreCoinsWidget(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        AmplitudeConnection.track_more_coins_tapped();
+        FirebaseAnalyticsService.track_more_coins_tapped();
         context.read<ChangeScreens>().changeScreen(1);
       },
       child: Container(

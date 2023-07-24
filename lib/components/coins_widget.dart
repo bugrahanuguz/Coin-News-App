@@ -1,12 +1,14 @@
 import 'package:coin_news_app/model/top_coin_model.dart';
 import 'package:coin_news_app/view/coins_screen.dart';
 import 'package:coin_news_app/viewmodel/coins_view_model.dart';
+import 'package:coin_news_app/viewmodel/firebase_analtyics.dart';
 import 'package:coin_news_app/viewmodel/news_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../constants/colors.dart';
 import '../constants/text_style.dart';
+import '../viewmodel/amplitude.dart';
 
 class CoinsWidget extends StatefulWidget {
   const CoinsWidget(
@@ -51,6 +53,8 @@ class _CoinsWidgetState extends State<CoinsWidget> {
         return GestureDetector(
           onTap: () {
             if (widget.isExplore == true) {
+              AmplitudeConnection.searched_coin_tapped(coinsList[index]!.name!);
+              FirebaseAnalyticsService.searched_coin_tapped(coinsList[index]!.name!);
               Provider.of<NewsViewModel>(context, listen: false)
                   .getCoinNews(coinsList[index]!.name!);
               Navigator.push(
@@ -135,6 +139,8 @@ class _CoinsWidgetState extends State<CoinsWidget> {
               widget.isExplore == false
                   ? GestureDetector(
                       onTap: () {
+                        AmplitudeConnection.tracked_coin_tapped(coinsList[index]!.name!);
+                        FirebaseAnalyticsService.tracked_coin_tapped(coinsList[index]!.name!);
                         Provider.of<NewsViewModel>(context, listen: false)
                             .getCoinNews(coinsList[index]!.name!);
                         Navigator.push(

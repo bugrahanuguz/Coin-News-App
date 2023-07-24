@@ -1,23 +1,28 @@
 import 'package:coin_news_app/constants/colors.dart';
-
+import 'package:coin_news_app/view/bottom_nav_bar.dart';
+import 'package:coin_news_app/viewmodel/amplitude.dart';
+import 'package:coin_news_app/viewmodel/firebase_analtyics.dart';
 import 'package:flutter/material.dart';
-
 import '../components/purchase_screen/purchase_screen_button_widget.dart';
 import '../components/purchase_screen/purchase_screen_lottie_widget.dart';
 import '../components/purchase_screen/purchase_screen_text_widget.dart';
 
 class PurchaseScreen extends StatelessWidget {
+  final String source;
   const PurchaseScreen({
     super.key,
+    required this.source,
   });
 
   @override
   Widget build(BuildContext context) {
+    AmplitudeConnection.purchase_screen_viewed();
+    FirebaseAnalyticsService.purchase_screen_viewed();
     // Provider.of<QonversionService>(context).getProducts();
     // var products = context.read<QonversionService>().products;
     // var handlePurchase =
     //           () => context.read<QonversionService>().purchaseProduct(products[0]);
-        // Provider.of<QonversionService>(context, listen: false).loadOfferings();
+    // Provider.of<QonversionService>(context, listen: false).loadOfferings();
 
     return Scaffold(
         backgroundColor: widgetbackground,
@@ -26,7 +31,9 @@ class PurchaseScreen extends StatelessWidget {
             const PurchaseScreenLottieWidget(),
             closeButtonWidget(context),
             const PurchaseScreenTextWidget(),
-            PurchaseScreenButtonsWidget()
+            PurchaseScreenButtonsWidget(
+              source: source,
+            )
           ],
         ));
   }
@@ -38,7 +45,13 @@ Positioned closeButtonWidget(BuildContext context) {
     left: 20,
     child: GestureDetector(
         onTap: () {
-          Navigator.pop(context);
+          FirebaseAnalyticsService.purchased_screen_closed();
+          AmplitudeConnection.purchased_screen_closed();
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const BottomNavBar()),
+              ((Route<dynamic> route) => false));
+          // AmplitudeConnection.purchase_canceled();
         },
         child: Image.asset("assets/buttons/close_button.png")),
   );

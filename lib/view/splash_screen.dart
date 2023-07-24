@@ -1,12 +1,12 @@
+import 'package:coin_news_app/view/purchase_screen.dart';
+import 'package:coin_news_app/viewmodel/amplitude.dart';
 import 'package:coin_news_app/viewmodel/coins_view_model.dart';
 import 'package:coin_news_app/viewmodel/firebase_remote_config.dart';
-import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../constants/colors.dart';
+import '../viewmodel/firebase_analtyics.dart';
 import '../viewmodel/qonversion.dart';
-import 'bottom_nav_bar.dart';
 
 class CustomSplashScreen extends StatefulWidget {
   const CustomSplashScreen({super.key});
@@ -42,11 +42,16 @@ class _CustomSplashScreenState extends State<CustomSplashScreen>
             .addCoinsToWatchCoins();
         Provider.of<QonversionService>(context, listen: false)
             .initializeQonversion();
-        Provider.of<RemoteConfigService>(context, listen: false)
-            .initialize();
+        Provider.of<RemoteConfigService>(context, listen: false).initialize();
         Provider.of<CoinsViewModel>(context, listen: false).loadTrackedCoins();
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const BottomNavBar()));
+        FirebaseAnalyticsService.purchase_screen_viewed();
+        AmplitudeConnection.purchase_screen_viewed();
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const PurchaseScreen(
+                      source: 'onboarding',
+                    )));
       }
     });
   }

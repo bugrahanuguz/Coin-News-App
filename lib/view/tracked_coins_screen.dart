@@ -1,4 +1,5 @@
 import 'package:coin_news_app/components/coins_widget.dart';
+import 'package:coin_news_app/viewmodel/amplitude.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../components/tracked_coins_screen/tracked_coin_app_bar.dart';
@@ -10,14 +11,16 @@ class TrackedCoinsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<TopCoinModel?> coinsList = context.watch<CoinsViewModel>().trackedCoins;
-    return  Scaffold(
+    AmplitudeConnection.tracked_coins_screen_viewed();
+    List<TopCoinModel?> coinsList =
+        context.watch<CoinsViewModel>().trackedCoins;
+    return Scaffold(
       appBar: const TrackedCoinsAppBar(),
       body: Padding(
         padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
         child: CoinsWidget(
-      isExplore: false,
-      coinsList: coinsList,
+          isExplore: false,
+          coinsList: coinsList,
         ),
       ),
     );

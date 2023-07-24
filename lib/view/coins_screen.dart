@@ -1,6 +1,8 @@
 import 'package:coin_news_app/model/news_model.dart';
 import 'package:coin_news_app/model/top_coin_model.dart';
+import 'package:coin_news_app/viewmodel/amplitude.dart';
 import 'package:coin_news_app/viewmodel/coins_view_model.dart';
+import 'package:coin_news_app/viewmodel/firebase_analtyics.dart';
 import 'package:coin_news_app/viewmodel/news_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +21,8 @@ class CoinsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AmplitudeConnection.coin_screen_viewed();
+    FirebaseAnalyticsService.coin_screen_viewed();
     List<NewsModel?> newsList = Provider.of<NewsViewModel>(context).newsList;
     List tweetList = [1];
     bool isAdd = Provider.of<CoinsViewModel>(context).isAdded(coin);

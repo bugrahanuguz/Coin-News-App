@@ -1,3 +1,5 @@
+import 'package:coin_news_app/viewmodel/amplitude.dart';
+import 'package:coin_news_app/viewmodel/firebase_analtyics.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -39,6 +41,9 @@ class CoinsScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ? isAdd == true
                     ? GestureDetector(
                         onTap: () {
+                          AmplitudeConnection.notification_disabled(coin.name!);
+                          FirebaseAnalyticsService.notification_disabled(
+                              coin.name!);
                           Provider.of<CoinsViewModel>(context, listen: false)
                               .removeTrackedCoin(coin);
                           Provider.of<CoinsViewModel>(context, listen: false)
@@ -51,6 +56,9 @@ class CoinsScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
                         ))
                     : GestureDetector(
                         onTap: () {
+                          AmplitudeConnection.notification_enabled(coin.name!);
+                          FirebaseAnalyticsService.notification_enabled(
+                              coin.name!);
                           Provider.of<CoinsViewModel>(context, listen: false)
                               .addTrackedCoin(coin);
                           Provider.of<CoinsViewModel>(context, listen: false)
@@ -84,6 +92,15 @@ class CoinsScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
             dividerColor: Colors.transparent,
             labelColor: coinNewsColor,
             unselectedLabelColor: Colors.white,
+            onTap: (value) {
+              if (value == 0) {
+                AmplitudeConnection.coin_screen_overview_tapped();
+                FirebaseAnalyticsService.coin_screen_overview_tapped();
+              } else {
+                AmplitudeConnection.coin_screen_news_view_tapped();
+                FirebaseAnalyticsService.coin_screen_news_view_tapped();
+              }
+            },
             tabs: [
               const Tab(
                 child: Text(

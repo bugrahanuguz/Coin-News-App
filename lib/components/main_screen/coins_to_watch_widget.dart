@@ -1,4 +1,5 @@
 import 'package:coin_news_app/constants/text_style.dart';
+import 'package:coin_news_app/viewmodel/amplitude.dart';
 import 'package:coin_news_app/viewmodel/news_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -6,6 +7,7 @@ import '../../constants/colors.dart';
 import '../../model/top_coin_model.dart';
 import '../../view/coins_screen.dart';
 import '../../viewmodel/coins_view_model.dart';
+import '../../viewmodel/firebase_analtyics.dart';
 
 class CoinstoWatchWidget extends StatelessWidget {
   const CoinstoWatchWidget({
@@ -30,6 +32,8 @@ class CoinstoWatchWidget extends StatelessWidget {
               .isBTC(coinsList[index]!);
           return GestureDetector(
             onTap: () {
+              AmplitudeConnection.cwtw_tapped(coinsList[index]!.name!);
+              FirebaseAnalyticsService.cwtw_tapped(coinsList[index]!.name!);
               Provider.of<NewsViewModel>(context, listen: false)
                   .getCoinNews(coinsList[index]!.name!);
               Navigator.push(

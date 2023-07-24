@@ -10,6 +10,8 @@ import '../components/main_screen/most_important_developments_widget.dart';
 import '../components/main_screen/overview_date_widget.dart';
 import '../components/main_screen/tracked_coins_text_widget.dart';
 import '../components/main_screen/tracked_coins_widget.dart';
+import '../viewmodel/amplitude.dart';
+import '../viewmodel/firebase_analtyics.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -21,6 +23,8 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
+    AmplitudeConnection.main_screen_viewed();
+    FirebaseAnalyticsService.main_screen_viewed();
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: MainScreenAppBar(),
