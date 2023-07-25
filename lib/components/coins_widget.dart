@@ -1,5 +1,6 @@
 import 'package:coin_news_app/model/top_coin_model.dart';
 import 'package:coin_news_app/view/coins_screen.dart';
+import 'package:coin_news_app/view/purchase_screen.dart';
 import 'package:coin_news_app/viewmodel/coins_view_model.dart';
 import 'package:coin_news_app/viewmodel/firebase_analtyics.dart';
 import 'package:coin_news_app/viewmodel/news_view_model.dart';
@@ -40,6 +41,7 @@ class _CoinsWidgetState extends State<CoinsWidget> {
 
   @override
   Widget build(BuildContext context) {
+    bool isPremium = true;
     List<TopCoinModel?> coinsList = widget.coinsList;
     // var newsModel = Provider.of<NewsViewModel>(context);
     return ListView.separated(
@@ -52,17 +54,28 @@ class _CoinsWidgetState extends State<CoinsWidget> {
         num currentPrice = coinsList[index]!.currentPrice ?? 0;
         return GestureDetector(
           onTap: () {
-            if (widget.isExplore == true) {
-              AmplitudeConnection.searched_coin_tapped(coinsList[index]!.name!);
-              FirebaseAnalyticsService.searched_coin_tapped(coinsList[index]!.name!);
-              Provider.of<NewsViewModel>(context, listen: false)
-                  .getCoinNews(coinsList[index]!.name!);
+            AmplitudeConnection.searched_coin_tapped(coinsList[index]!.name!);
+            FirebaseAnalyticsService.searched_coin_tapped(
+                coinsList[index]!.name!);
+            if (isPremium == true) {
+              if (widget.isExplore == true) {
+                Provider.of<NewsViewModel>(context, listen: false)
+                    .getCoinNews(coinsList[index]!.name!);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => CoinsScreen(
+                              coin: coinsList[index]!,
+                              isBTC: isBTC,
+                            )));
+              }
+            } else {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => CoinsScreen(
-                            coin: coinsList[index]!,
-                            isBTC: isBTC,
+                      builder: (context) => PurchaseScreen(
+                            source: 'premium_coin',
+                            coinName: coinsList[index]!.name!,
                           )));
             }
           },
@@ -139,17 +152,29 @@ class _CoinsWidgetState extends State<CoinsWidget> {
               widget.isExplore == false
                   ? GestureDetector(
                       onTap: () {
-                        AmplitudeConnection.tracked_coin_tapped(coinsList[index]!.name!);
-                        FirebaseAnalyticsService.tracked_coin_tapped(coinsList[index]!.name!);
-                        Provider.of<NewsViewModel>(context, listen: false)
-                            .getCoinNews(coinsList[index]!.name!);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => CoinsScreen(
-                                      coin: coinsList[index]!,
-                                      isBTC: isBTC,
-                                    )));
+                        AmplitudeConnection.tracked_coin_tapped(
+                            coinsList[index]!.name!);
+                        FirebaseAnalyticsService.tracked_coin_tapped(
+                            coinsList[index]!.name!);
+                        if (isPremium == true) {
+                          Provider.of<NewsViewModel>(context, listen: false)
+                              .getCoinNews(coinsList[index]!.name!);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CoinsScreen(
+                                        coin: coinsList[index]!,
+                                        isBTC: isBTC,
+                                      )));
+                        } else {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PurchaseScreen(
+                                        source: 'premium_coin',
+                                        coinName: coinsList[index]!.name!,
+                                      )));
+                        }
                       },
                       child:
                           Image.asset("assets/buttons/tracked_coins_arrow.png"))

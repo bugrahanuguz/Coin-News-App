@@ -73,6 +73,7 @@ class NewsPage extends StatelessWidget {
           itemBuilder: ((context, index) => ShowTweetsWidget(
                 isTappedMid: false,
                 coin: coin,
+                orderIndex: (index + 1).toString(),
               )),
           separatorBuilder: (context, index) => const SizedBox(height: 15),
           itemCount: 2),
@@ -86,7 +87,10 @@ class NewsPage extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: ((context, index) => ShowNewsWidget(
-              news: newsList[index], isTappedMid: false, coin: coin)),
+              news: newsList[index],
+              isTappedMid: false,
+              coin: coin,
+              orderIndex: (index + 1).toString())),
           separatorBuilder: (context, index) => const SizedBox(height: 15),
           itemCount: newsList.length),
     );

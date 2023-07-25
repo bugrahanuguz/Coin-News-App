@@ -14,11 +14,11 @@ class MostImportantDevelopmentsWidget extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (BuildContext context, int index) {
-        return const Column(
+        return  Column(
           children: [
             // ShowNewsWidget(isTappedMid: true,),
-            SizedBox(height: 15),
-            ShowTweetsWidget(isTappedMid: true,)
+            const SizedBox(height: 15),
+            ShowTweetsWidget(isTappedMid: true,orderIndex: (index+1).toString(),)
           ],
         );
       },

@@ -11,8 +11,12 @@ import '../../constants/text_style.dart';
 class PurchaseScreenButtonsWidget extends StatelessWidget {
   final String productID = 'cn_4999_1y_3d0';
   final String source;
+  final String? coinName;
+
   const PurchaseScreenButtonsWidget({
-    super.key, required this.source,
+    super.key,
+    required this.source,
+    this.coinName,
   });
 
   @override
@@ -30,8 +34,10 @@ class PurchaseScreenButtonsWidget extends StatelessWidget {
             GestureDetector(
               onTap: () async {
                 print("butona basıldı");
-                AmplitudeConnection.purchased_intended(source);
-                FirebaseAnalyticsService.purchased_intended(source);
+                AmplitudeConnection.purchased_intended(
+                    source, coinName!, "product");
+                FirebaseAnalyticsService.purchased_intended(
+                    source, coinName!, "product");
                 try {
                   QProduct? product =
                       await qonversionService.getProductById(productID);
@@ -100,6 +106,8 @@ class PurchaseScreenButtonsWidget extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
+                    AmplitudeConnection.webview_link_opened();
+                    FirebaseAnalyticsService.webview_link_opened();
                     context.read<ChangeScreens>().launchInBrowser(
                         Uri.parse("https://coinnewsapp.com/terms.html"));
                   },
@@ -123,6 +131,8 @@ class PurchaseScreenButtonsWidget extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
+                    AmplitudeConnection.webview_link_opened();
+                    FirebaseAnalyticsService.webview_link_opened();
                     context.read<ChangeScreens>().launchInBrowser(
                         Uri.parse("https://coinnewsapp.com/privacy.html"));
                   },

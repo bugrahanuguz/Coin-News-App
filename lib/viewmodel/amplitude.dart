@@ -2,10 +2,93 @@ import 'package:amplitude_flutter/amplitude.dart';
 
 class AmplitudeConnection {
   static late Amplitude amplitude;
-
+  static bool attSuccess = false;
+  static bool notifSuccess = false;
   static Future<void> connect_amplitude() async {
     amplitude = Amplitude.getInstance();
     amplitude.init("603c86f2cd1ce1864ef0ee7949b0b839");
+  }
+
+  static Future<void> user_property(String premium) async {
+    print(notifSuccess);
+    print(attSuccess);
+    await amplitude.setUserProperties({
+      'premium': premium,
+      'notifications': notifSuccess.toString(),
+      'att': attSuccess.toString(),
+    });
+  }
+
+  static Future<void> trial_started() async {
+    await amplitude.logEvent('trial_started');
+  }
+
+  static Future<void> trial_converted() async {
+    await amplitude.logEvent('trial_converted');
+  }
+
+  static Future<void> trial_canceled() async {
+    await amplitude.logEvent('trial_canceled');
+  }
+
+  static Future<void> trial_still_active() async {
+    await amplitude.logEvent('trial_still_active');
+  }
+
+  static Future<void> trial_expired() async {
+    await amplitude.logEvent('trial_expired');
+  }
+
+  static Future<void> trial_billing_retry_entered() async {
+    await amplitude.logEvent('trial_billing_retry_entered');
+  }
+
+  static Future<void> webview_link_opened() async {
+    await amplitude.logEvent('webview_link_opened');
+  }
+
+  static Future<void> subscription_started() async {
+    await amplitude.logEvent('subscription_started');
+  }
+
+  static Future<void> subscription_renewed() async {
+    await amplitude.logEvent('subscription_renewed');
+  }
+
+  static Future<void> subscription_refunded() async {
+    await amplitude.logEvent('subscription_refunded');
+  }
+
+  static Future<void> subscription_billing_retry_entered() async {
+    await amplitude.logEvent('subscription_billing_retry_entered');
+  }
+
+  static Future<void> subscription_expired() async {
+    await amplitude.logEvent('subscription_expired');
+  }
+
+  static Future<void> att_asked() async {
+    await amplitude.logEvent('att_asked');
+  }
+
+  static Future<bool> att_success() async {
+    await amplitude.logEvent('att_success');
+    attSuccess = true;
+    return attSuccess;
+  }
+
+  static Future<void> notif_asked() async {
+    await amplitude.logEvent('notif_asked');
+  }
+
+  static Future<bool> notif_success() async {
+    await amplitude.logEvent('notif_success');
+    notifSuccess = true;
+    return notifSuccess;
+  }
+
+  static Future<void> purchase_checked() async {
+    await amplitude.logEvent('purchase_checked');
   }
 
   static Future<void> home_screen_opened() async {
@@ -29,22 +112,25 @@ class AmplitudeConnection {
     await amplitude.logEvent('purchased_screen_closed');
   }
 
-  static Future<void> purchased_intended(String source) async {
+  static Future<void> purchased_intended(
+      String source, String coin, String product) async {
     print(source);
     await amplitude.logEvent('purchased_intended',
-        eventProperties: {'source': source, 'product': 'product'});
+        eventProperties: {'source': source, 'coin': coin, 'product': product});
   }
 
-  static Future<void> purchased_canceled(String source) async {
+  static Future<void> purchased_canceled(
+      String source, String coin, String product) async {
     print(source);
     await amplitude.logEvent('purchased_canceled',
-        eventProperties: {'source': source, 'product': 'product'});
+        eventProperties: {'source': source, 'coin': coin, 'product': product});
   }
 
-  static Future<void> purchased(String source) async {
+  static Future<void> purchased(
+      String source, String coin, String product) async {
     print(source);
     await amplitude.logEvent('purchased',
-        eventProperties: {'source': source, 'product': 'product'});
+        eventProperties: {'source': source, 'coin': coin, 'product': product});
   }
 
   //MAİN SCREEN
@@ -67,6 +153,7 @@ class AmplitudeConnection {
 
   static Future<void> mid_tapped(
       String type, String url, String order, String source) async {
+    print(order);
     await amplitude.logEvent('mid_tapped', eventProperties: {
       'type': type,
       'url': url,
@@ -149,6 +236,7 @@ class AmplitudeConnection {
 
   static Future<void> coin_screen_news_tapped(
       String coin, String type, String url, String order, String source) async {
+    print(order);
     await amplitude.logEvent('mid_tapped', eventProperties: {
       'coin': coin,
       'type': type,

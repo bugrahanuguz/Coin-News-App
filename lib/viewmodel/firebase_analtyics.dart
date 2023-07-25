@@ -2,11 +2,93 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 
 class FirebaseAnalyticsService {
   static late FirebaseAnalytics analytics;
-
+  static bool attSuccess = false;
+  static bool notifSuccess = false;
   FirebaseAnalyticsService._();
 
   static Future<void> init() async {
     analytics = FirebaseAnalytics.instance;
+  }
+
+  static Future<void> trial_started() async {
+    await analytics.logEvent(name: 'trial_started');
+  }
+
+  static Future<void> trial_converted() async {
+    await analytics.logEvent(name: 'trial_converted');
+  }
+
+  static Future<void> trial_canceled() async {
+    await analytics.logEvent(name: 'trial_canceled');
+  }
+
+  static Future<void> trial_still_active() async {
+    await analytics.logEvent(name: 'trial_still_active');
+  }
+
+  static Future<void> trial_expired() async {
+    await analytics.logEvent(name: 'trial_expired');
+  }
+
+  static Future<void> trial_billing_retry_entered() async {
+    await analytics.logEvent(name: 'trial_billing_retry_entered');
+  }
+
+  static Future<void> webview_link_opened() async {
+    await analytics.logEvent(name: 'webview_link_opened');
+  }
+
+  static Future<void> subscription_started() async {
+    await analytics.logEvent(name: 'subscription_started');
+  }
+
+  static Future<void> subscription_renewed() async {
+    await analytics.logEvent(name: 'subscription_renewed');
+  }
+
+  static Future<void> subscription_refunded() async {
+    await analytics.logEvent(name: 'subscription_refunded');
+  }
+
+  static Future<void> subscription_billing_retry_entered() async {
+    await analytics.logEvent(name: 'subscription_billing_retry_entered');
+  }
+
+  static Future<void> subscription_expired() async {
+    await analytics.logEvent(name: 'subscription_expired');
+  }
+
+  static Future<void> att_asked() async {
+    await analytics.logEvent(name: 'att_asked');
+  }
+
+  static Future<bool> att_success() async {
+    await analytics.logEvent(name: 'att_success');
+    attSuccess = true;
+    return attSuccess;
+  }
+
+  static Future<void> notif_asked() async {
+    await analytics.logEvent(name: 'notif_asked');
+  }
+
+  static Future<bool> notif_success() async {
+    await analytics.logEvent(name: 'notif_success');
+    notifSuccess = true;
+    return notifSuccess;
+  }
+
+  static Future<void> purchase_checked() async {
+    await analytics.logEvent(name: 'purchase_checked');
+  }
+
+  static Future<void> user_property(
+      String premium,) async {
+    await analytics.logEvent(name: 'user_property', parameters: {
+      'premium': premium,
+      'notifications': notifSuccess.toString(),
+      'att': attSuccess.toString(),
+    });
   }
 
   static Future<void> home_screen_opened() async {
@@ -30,25 +112,28 @@ class FirebaseAnalyticsService {
     await analytics.logEvent(name: 'purchased_screen_closed');
   }
 
-  static Future<void> purchased_intended(String source) async {
+  static Future<void> purchased_intended(
+      String source, String coin, String product) async {
     print(source);
     await analytics.logEvent(
         name: 'purchased_intended',
-        parameters: {'source': source, 'product': 'product'});
+        parameters: {'source': source, 'coin': coin, 'product': product});
   }
 
-  static Future<void> purchased_canceled(String source) async {
+  static Future<void> purchased_canceled(
+      String source, String coin, String product) async {
     print(source);
     await analytics.logEvent(
         name: 'purchased_canceled',
-        parameters: {'source': source, 'product': 'product'});
+        parameters: {'source': source, 'coin': coin, 'product': product});
   }
 
-  static Future<void> purchased(String source) async {
+  static Future<void> purchased(
+      String source, String coin, String product) async {
     print(source);
     await analytics.logEvent(
         name: 'purchased',
-        parameters: {'source': source, 'product': 'product'});
+        parameters: {'source': source, 'coin': coin, 'product': product});
   }
 
   //MAİN SCREEN
@@ -81,7 +166,6 @@ class FirebaseAnalyticsService {
 
   static Future<void> cwtw_tapped(String coin) async {
     await analytics.logEvent(name: 'cwtw_tapped', parameters: {'coin': coin});
-
   }
 
   //EXPLORE SCREEN

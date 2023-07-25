@@ -46,11 +46,13 @@ class _CustomSplashScreenState extends State<CustomSplashScreen>
         Provider.of<CoinsViewModel>(context, listen: false).loadTrackedCoins();
         FirebaseAnalyticsService.purchase_screen_viewed();
         AmplitudeConnection.purchase_screen_viewed();
+        AmplitudeConnection.user_property("false");
+        FirebaseAnalyticsService.user_property("false");
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
                 builder: (context) => const PurchaseScreen(
-                      source: 'onboarding',
+                      source: 'app_started',
                     )));
       }
     });

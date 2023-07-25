@@ -11,24 +11,30 @@ class ShowTweetsWidget extends StatelessWidget {
     super.key,
     required this.isTappedMid,
     this.coin,
+    required this.orderIndex,
   });
   final isTappedMid;
   final TopCoinModel? coin;
+  final String orderIndex;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         //APİ GÜNCELLENİNCE GÜNCELLECEK !!!!!!!!!!!!!!!!!!!!!!
-       if (isTappedMid == true) {
-        AmplitudeConnection.mid_tapped("tweets", "url", "order", "source");
-        FirebaseAnalyticsService.mid_tapped("tweets", "url", "order", "source");
-       }else {
-        AmplitudeConnection.coin_screen_news_tapped(
-                coin!.name!, "tweets", "url", "order", "source");
-        FirebaseAnalyticsService.coin_screen_news_tapped(
-                coin!.name!, "tweets", "url", "order", "source");
-       }
-
+        if (isTappedMid == true) {
+          AmplitudeConnection.mid_tapped("tweets", "url", orderIndex, "source");
+          AmplitudeConnection.webview_link_opened();
+          FirebaseAnalyticsService.webview_link_opened();
+          FirebaseAnalyticsService.mid_tapped(
+              "tweets", "url", orderIndex, "source");
+        } else {
+          AmplitudeConnection.webview_link_opened();
+          FirebaseAnalyticsService.webview_link_opened();
+          AmplitudeConnection.coin_screen_news_tapped(
+              coin!.name!, "tweets", "url", orderIndex, "source");
+          FirebaseAnalyticsService.coin_screen_news_tapped(
+              coin!.name!, "tweets", "url", orderIndex, "source");
+        }
       },
       child: Container(
         width: MediaQuery.of(context).size.width * 0.92,

@@ -15,10 +15,12 @@ class ShowNewsWidget extends StatelessWidget {
     required this.news,
     required this.isTappedMid,
     this.coin,
+    required this.orderIndex,
   });
   final NewsModel? news;
   final bool isTappedMid;
   final TopCoinModel? coin;
+  final String orderIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +31,18 @@ class ShowNewsWidget extends StatelessWidget {
       onTap: () {
         if (isTappedMid == true) {
           AmplitudeConnection.mid_tapped(
-              'news', news!.url!, 'order', news!.source!);
+              'news', news!.url!, orderIndex, news!.source!);
+          AmplitudeConnection.webview_link_opened();
+          FirebaseAnalyticsService.webview_link_opened();
           FirebaseAnalyticsService.mid_tapped(
-              'news', news!.url!, 'order', news!.source!);
+              'news', news!.url!, orderIndex, news!.source!);
         } else {
           AmplitudeConnection.coin_screen_news_tapped(
-              coin!.name!, 'news', news!.url!, 'order', news!.source!);
+              coin!.name!, 'news', news!.url!, orderIndex, news!.source!);
+          AmplitudeConnection.webview_link_opened();
+          FirebaseAnalyticsService.webview_link_opened();
           FirebaseAnalyticsService.coin_screen_news_tapped(
-              coin!.name!, 'news', news!.url!, 'order', news!.source!);
+              coin!.name!, 'news', news!.url!, orderIndex, news!.source!);
         }
         context.read<ChangeScreens>().launchInBrowser(Uri.parse(news!.url!));
       },

@@ -1,4 +1,5 @@
 import 'package:coin_news_app/constants/text_style.dart';
+import 'package:coin_news_app/view/purchase_screen.dart';
 import 'package:coin_news_app/viewmodel/amplitude.dart';
 import 'package:coin_news_app/viewmodel/news_view_model.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ class CoinstoWatchWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     List<TopCoinModel?> coinsList =
         context.read<CoinsViewModel>().coinsWatchWeek;
+    bool isPremium = true;
     return Container(
       alignment: Alignment.centerLeft,
       //height = 80
@@ -34,15 +36,25 @@ class CoinstoWatchWidget extends StatelessWidget {
             onTap: () {
               AmplitudeConnection.cwtw_tapped(coinsList[index]!.name!);
               FirebaseAnalyticsService.cwtw_tapped(coinsList[index]!.name!);
-              Provider.of<NewsViewModel>(context, listen: false)
-                  .getCoinNews(coinsList[index]!.name!);
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => CoinsScreen(
-                            coin: coinsList[index]!,
-                            isBTC: isBTC,
-                          )));
+              if (isPremium == true) {
+                Provider.of<NewsViewModel>(context, listen: false)
+                    .getCoinNews(coinsList[index]!.name!);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => CoinsScreen(
+                              coin: coinsList[index]!,
+                              isBTC: isBTC,
+                            )));
+              } else {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => PurchaseScreen(
+                              source: 'premium_coin',
+                              coinName: coinsList[index]!.name,
+                            )));
+              }
             },
             child: Container(
               //width = 91

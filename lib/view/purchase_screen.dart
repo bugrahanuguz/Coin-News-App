@@ -9,9 +9,11 @@ import '../components/purchase_screen/purchase_screen_text_widget.dart';
 
 class PurchaseScreen extends StatelessWidget {
   final String source;
+  final String? coinName;
   const PurchaseScreen({
     super.key,
     required this.source,
+    this.coinName,
   });
 
   @override
@@ -33,6 +35,7 @@ class PurchaseScreen extends StatelessWidget {
             const PurchaseScreenTextWidget(),
             PurchaseScreenButtonsWidget(
               source: source,
+              coinName: coinName ?? "",
             )
           ],
         ));
