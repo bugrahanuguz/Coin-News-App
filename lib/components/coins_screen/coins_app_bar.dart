@@ -23,6 +23,8 @@ class CoinsScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isNotifOn =
+        Provider.of<CoinsViewModel>(context).isNotificationActive(coin.name!);
     return AppBar(
       elevation: 0,
       backgroundColor: backgroundColor,
@@ -38,16 +40,17 @@ class CoinsScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
               width: 10,
             ),
             isBTC == false
-                ? isAdd == true
+                ? isNotifOn == true
                     ? GestureDetector(
                         onTap: () {
                           AmplitudeConnection.notification_disabled(coin.name!);
                           FirebaseAnalyticsService.notification_disabled(
                               coin.name!);
                           Provider.of<CoinsViewModel>(context, listen: false)
-                              .removeTrackedCoin(coin);
-                          Provider.of<CoinsViewModel>(context, listen: false)
                               .isAdded(coin);
+                          Provider.of<CoinsViewModel>(context, listen: false)
+                              .toggleNotification(coin.name!);
+
                           Provider.of<CoinsViewModel>(context, listen: false)
                               .saveTrackedCoins();
                         },
@@ -61,6 +64,8 @@ class CoinsScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
                               coin.name!);
                           Provider.of<CoinsViewModel>(context, listen: false)
                               .addTrackedCoin(coin);
+                          Provider.of<CoinsViewModel>(context, listen: false)
+                              .toggleNotification(coin.name!);
                           Provider.of<CoinsViewModel>(context, listen: false)
                               .isAdded(coin);
                           Provider.of<CoinsViewModel>(context, listen: false)

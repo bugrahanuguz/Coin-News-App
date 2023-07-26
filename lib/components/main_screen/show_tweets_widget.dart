@@ -64,7 +64,7 @@ class ShowTweetsWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(width: MediaQuery.of(context).size.width * 0.55),
+                SizedBox(width: MediaQuery.of(context).size.width * 0.53),
                 Image.asset("assets/twitter_logo.png")
               ],
             ),
@@ -73,7 +73,7 @@ class ShowTweetsWidget extends StatelessWidget {
               "#eth",
               style: tweetTextStyle(15),
             ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.085),
             const Align(
               alignment: Alignment.bottomRight,
               child: Text(

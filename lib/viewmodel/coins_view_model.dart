@@ -17,6 +17,8 @@ class CoinsViewModel extends ChangeNotifier {
   List<TopCoinModel?> coinsItems = [];
   List<TopCoinModel?> trackedCoins = [];
   List<TopCoinModel?> filteredCoinsList = [];
+  Map<String, bool> _notifications = {};
+  bool isNotificationActive(String coinId) => _notifications[coinId] ?? false;
 
   Future<List<TopCoinModel?>> getCoins() async {
     final data = await service.getTopCoins();
@@ -45,12 +47,20 @@ class CoinsViewModel extends ChangeNotifier {
   }
 
   void addTrackedCoin(TopCoinModel? coin) {
-    trackedCoins.add(coin);
-    notifyListeners();
+    if (!isAdded(coin!)) {
+      trackedCoins.add(coin);
+      if (!isNotificationActive(coin.name!)) { 
+      toggleNotification(coin.name!);  
+    }
+      notifyListeners();
+    }
   }
 
   void removeTrackedCoin(TopCoinModel? coin) {
     trackedCoins.remove(coin);
+     if (isNotificationActive(coin!.name!)) {  
+    toggleNotification(coin.name!);  
+  }
     notifyListeners();
   }
 
@@ -104,6 +114,11 @@ class CoinsViewModel extends ChangeNotifier {
       }
     }
     return false;
+  }
+
+  void toggleNotification(String coinId) {
+    _notifications[coinId] = !(_notifications[coinId] ?? false);
+    notifyListeners();
   }
 
   String formatNumber(num num) {

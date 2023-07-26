@@ -24,7 +24,7 @@ class MarketCapAndVolumeWidget extends StatelessWidget {
       String value, String changeValue, bool isPositive) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.105,
-      width: 180,
+      width: MediaQuery.of(context).size.width * 0.455,
       padding: EdgeInsets.only(left: 10),
       decoration: BoxDecoration(
           color: widgetbackground, borderRadius: BorderRadius.circular(10)),

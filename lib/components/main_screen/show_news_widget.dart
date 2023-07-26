@@ -67,13 +67,13 @@ class ShowNewsWidget extends StatelessWidget {
                 ),
               ),
             ), //size = 84
-            const SizedBox(width: 10),
+            const SizedBox(width: 5),
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 const SizedBox(height: 10),
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.66,
+                  width: MediaQuery.of(context).size.width * 0.63,
                   height: MediaQuery.of(context).size.height * 0.1,
                   alignment: Alignment.centerLeft,
                   child: Text(

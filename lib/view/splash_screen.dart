@@ -42,7 +42,7 @@ class _CustomSplashScreenState extends State<CustomSplashScreen>
             .addCoinsToWatchCoins();
         Provider.of<QonversionService>(context, listen: false)
             .initializeQonversion();
-        Provider.of<RemoteConfigService>(context, listen: false).initialize();
+        await Provider.of<RemoteConfigService>(context, listen: false).initialize();
         Provider.of<CoinsViewModel>(context, listen: false).loadTrackedCoins();
         FirebaseAnalyticsService.purchase_screen_viewed();
         AmplitudeConnection.purchase_screen_viewed();

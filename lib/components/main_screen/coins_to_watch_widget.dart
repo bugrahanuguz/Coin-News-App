@@ -23,7 +23,8 @@ class CoinstoWatchWidget extends StatelessWidget {
     return Container(
       alignment: Alignment.centerLeft,
       //height = 80
-      height: MediaQuery.of(context).size.height * 0.105,
+      height: MediaQuery.of(context).size.height * 0.115,
+
       child: ListView.separated(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
@@ -59,7 +60,7 @@ class CoinstoWatchWidget extends StatelessWidget {
             child: Container(
               //width = 91
               width: MediaQuery.of(context).size.width * 0.227,
-              padding: const EdgeInsets.all(5),
+              padding: const EdgeInsets.only(top: 5),
               decoration: BoxDecoration(
                   color: widgetbackground,
                   borderRadius: BorderRadius.circular(9.7)),

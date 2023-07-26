@@ -31,7 +31,7 @@ class TrackedCoinsWidget extends StatelessWidget {
           shrinkWrap: true,
           children: [
             trackCoin(coinsList),
-            const SizedBox(width: 15),
+            const SizedBox(width: 10),
             trackMoreCoinsWidget(context)
           ]),
     );
@@ -119,7 +119,7 @@ class TrackedCoinsWidget extends StatelessWidget {
         );
       },
       separatorBuilder: (BuildContext context, int index) {
-        return const SizedBox(width: 15);
+        return const SizedBox(width: 10);
       },
     );
   }
