@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:coin_news_app/service/coin_service.dart';
 import 'package:coin_news_app/service/news_service.dart';
@@ -99,8 +98,8 @@ class MyApp extends StatelessWidget {
             Brightness.light, // Navigation bar icons' brightness
       ),
     );
-    String _coinsBaseUrl = 'http://46.101.103.55:3000';
-    String _newsBaseUrl = 'http://coinnewsapp.com/nw/';
+    String _coinsBaseUrl = '';
+    String _newsBaseUrl = '';
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ChangeScreens()),

@@ -5,7 +5,7 @@ class QonversionService extends ChangeNotifier {
 
 
   Future<void> initializeQonversion() async {
-    final config = QonversionConfigBuilder('liN2bWGfO-pHWqygNH0ijR-vXlHoS3F5',
+    final config = QonversionConfigBuilder('',
             QLaunchMode.subscriptionManagement)
         .setEntitlementsCacheLifetime(QEntitlementsCacheLifetime.year)
         .build();

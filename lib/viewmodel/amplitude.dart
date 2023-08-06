@@ -6,7 +6,7 @@ class AmplitudeConnection {
   static bool notifSuccess = false;
   static Future<void> connect_amplitude() async {
     amplitude = Amplitude.getInstance();
-    amplitude.init("603c86f2cd1ce1864ef0ee7949b0b839");
+    amplitude.init("");
   }
 
   static Future<void> user_property(String premium) async {
