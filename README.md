@@ -1,19 +1,22 @@
 # Coin News
 
-Coin News, Flutter ve Firebase altyapısı kullanılarak geliştirilmiş, 2000'den fazla kripto para birimini takip etmek için tasarlanmış bir mobil uygulamadır. Bu uygulama sayesinde kullanıcılar, kripto para birimlerinin anlık fiyatlarını, haberlerini ve genel bilgilerini kolayca takip edebilirler.
+Coin News is a mobile application developed using Flutter and Firebase infrastructure, designed to track over 2000 cryptocurrencies. With this app, users can easily monitor real-time prices, news, and general information about various cryptocurrencies.
 
 
-## Özellikler
+## Features
 
-- **Anlık Fiyatlar**: 2000'den fazla kripto para biriminin anlık fiyatlarını takip edin.
-- **Haberler**: Kripto para birimleriyle ilgili güncel haberleri okuyun.
-- **Genel Bilgiler**: Her kripto para birimi hakkında detaylı genel bilgileri görüntüleyin.
-- **Bildirimler**: Önemli haberler ve fiyat değişiklikleri hakkında bildirimleri alın.
-- **Kullanıcı Analitiği**: Kullanıcı davranışlarını anlamak için Amplitude ve Firebase Analtyics'i kullanın.
-- **Uygulama içi Satın Alma**: Qonversion entegrasyonu ile uygulama içi satın alma işlemlerini yönetin.
+- **Real-Time Prices**: Track real-time prices of over 2000 cryptocurrencies.
+- **News**: Read up-to-date news about various cryptocurrencies.
+- **General Information**: View detailed general information about each cryptocurrency.
+- **Notifications**: Receive notifications about important news and price changes.
+- **User Analytics**: Utilize Amplitude and Firebase Analytics to understand user behavior.
+- **In-App Purchases**: Manage in-app purchase transactions with Qonversion integration.
 
-## Ekran Görüntüleri
-<img src="https://github.com/bugrahanuguz/Coin-News-App/assets/114190142/c985b3ed-df29-4aa9-8a58-76b8891baafd" alt="Home Screen" width="320" height="180">
-<img src="https://github.com/bugrahanuguz/Coin-News-App/assets/114190142/3593d72c-dd1e-4466-b06c-a45c379796cc" alt="Purchase Screen" width="320" height="180">
-<img src="https://github.com/bugrahanuguz/Coin-News-App/assets/114190142/a373a60d-d0e4-430b-bf5a-a03d89418220" alt="News Screen" width="320" height="180">
-<img src="https://github.com/bugrahanuguz/Coin-News-App/assets/114190142/ae9e9508-c437-468b-8633-7c620e7ccfc4" alt="Coin Screen" width="320" height="180">
+## Screenshots
+<img src="https://github.com/bugrahanuguz/Coin-News-App/assets/114190142/c985b3ed-df29-4aa9-8a58-76b8891baafd" alt="Splash Screen" width="220" height="500">
+<img src="https://github.com/bugrahanuguz/Coin-News-App/assets/114190142/76c1c432-52c2-460a-92a1-8a0d32fb08a7" alt="Home Screen" width="220" height="500">
+<img src="https://github.com/bugrahanuguz/Coin-News-App/assets/114190142/3593d72c-dd1e-4466-b06c-a45c379796cc" alt="Purchase Screen" width="220" height="500">
+<img src="https://github.com/bugrahanuguz/Coin-News-App/assets/114190142/ae9e9508-c437-468b-8633-7c620e7ccfc4" alt="Coin Screen" width="220" height="500">
+<img src="https://github.com/bugrahanuguz/Coin-News-App/assets/114190142/a373a60d-d0e4-430b-bf5a-a03d89418220" alt="News Screen" width="220" height="500">
+
+
